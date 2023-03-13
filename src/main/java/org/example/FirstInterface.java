@@ -1,10 +1,10 @@
 package org.example;
 
 public interface FirstInterface {
-    default void tostring()
-    {
-        System.out.println("Hello");
-    };
+    double[] arrayOne = new double[0];
+    int number = 0;
+    double prodNumberAll();
+    void tostring();
     void equals();
     void HashCode();
 }
