@@ -13,4 +13,5 @@ public interface Message {
     default boolean equal(Object O, Object a) {
         return Objects.equals(O,a);
     }
+    String getName();
 }
