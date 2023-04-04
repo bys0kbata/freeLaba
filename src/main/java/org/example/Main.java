@@ -1,12 +1,10 @@
 package org.example;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args)
-    {
-        Viber n = new Viber();
-        n.addContacts("89963420562","Гоша","megasuperJava");
-        System.out.println(n.getUserInfo());
-        System.out.println(n.getSizeContacts());
-        System.out.println(n.toString());
+    public static void main(String[] args) throws IOException {
+        ControlClass Control = new ControlClass();
+        Control.ControlMessage();
     }
 }
