@@ -45,6 +45,19 @@ public class Viber implements Message{
             nameContacts.add( nameContact);
     }
     /*
+    Изменение данных контакта
+    */
+    public void editContacts(String idCont, String nameContact,String NumberCon)
+    {
+        for (int i = 0; i < idContact.size(); i++) {
+
+            if (idContact.get(i) == NumberCon) {
+                ContactNumber.set(i,idCont);
+                nameContacts.set(i,nameContact);
+            }
+        }
+    }
+    /*
     Получение количество записанных контактов у пользователя
      */
     public int getSizeContacts()
