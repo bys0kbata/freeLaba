@@ -1,76 +1,81 @@
 package org.example;
 
-public class Viber implements Message{
-    //Имя пользователя
-    String nameUser;
-    //id Контактов
-    int[] idContacts;
-    //Имя контактов
-    String[] nameContacts;
-    //конструктор по умолчанию
-    public Viber()
-    {
-        this.nameUser =  "DefaultName";
-        this.idContacts = new int[1];
-        this.idContacts[0] = 911;
-        this.nameContacts =new String[1];
-        this.nameContacts[0] = "Cлужба помощи.";
-    }
-   //конструктор с параметрами
-    public Viber(String nameUser,int sizeContact)
-    {
-        this.nameUser = nameUser;
-        this.idContacts = new int[sizeContact];
-    }
-    //Добавление контакта.
-    @Override
-    public void addContacts(int idCont, String nameContact)
-    {
-            idContacts[1] = idCont;
-            nameContacts[1] = nameContact;
-    }
-    //Получение количество контактов
+import java.util.ArrayList;
 
+public class Viber implements Message{
+    String nameUserViber = "DefaultNickName"; //Nickname пользователя
+    String nameViber = "DefaultName"; //Имя пользователя
+    String NumberViber = "000000"; //Номер пользователя
+    ArrayList<String> idContact= new ArrayList<>(100000); //Id Контактов у пользователя
+    ArrayList<String> ContactNumber = new ArrayList<>(100000);//Номера контактов у пользователя
+    private ArrayList<String> nameContacts = new ArrayList<>(100000);//Имя контактов у пользователя
+    /*
+    Конструкторы все
+     */
+        //конструктор по умолчанию
+    public Viber()
+        {
+            this.nameUserViber = "DefaultName";
+            this.idContact.add(0, "DefaultConOne");
+            this.ContactNumber.add(0, "911");
+            this.nameContacts.add(0, "Cлужба помощи.");
+            this.idContact.add(1, "DefaultConTwo");
+            this.ContactNumber.add(1, "112");
+            this.nameContacts.add(1, "Cлужба помощи.");
+        }
+        //конструктор с параметрами
+    public Viber(String nameUser)
+        {
+            this.nameUserViber = nameUser;
+            this.idContact.add(0, "DefaultConOne");
+            this.ContactNumber.add(0, "911");
+            this.nameContacts.add(0, "Служба помощи.");
+            this.idContact.add(1, "DefaultConTwo");
+            this.ContactNumber.add(1, "112");
+            this.nameContacts.add(1, "Cлужба помощи.");
+        }
+    /*
+    Добавление контактов.
+     */
+    @Override
+    public void addContacts(String idCont, String nameContact,String NumberCon)
+    {
+            idContact.add(NumberCon);
+            ContactNumber.add(idCont);
+            nameContacts.add( nameContact);
+    }
+    /*
+    Получение количество записанных контактов у пользователя
+     */
     public int getSizeContacts()
     {
-        return idContacts.length;
+        return ContactNumber.size();
     }
-//Переопределение метода toString()
-    public void tostring() {
-        for (int i = 0; i < idContacts.length; i++) {
-            System.out.println(i+1 + ". id number = "+ idContacts[i]+" Имя контакта: " + nameContacts[i]+"\n");
+    /*
+    Получение полной информаций о пользователе.
+     */
+    @Override
+    public String getUserInfo() {
+        String UserInfo = "Ваше NickName: "+ nameUserViber+"\n Ваше Имя: "+ nameViber +"\n Ваш номер: "+NumberViber;
+        return UserInfo;
+    }
+
+    //Переопределение метода toString()
+    @Override
+    public String toString() {
+        String wordsAll = " ";
+        for (int i = 0; i < getSizeContacts(); i++) {
+            wordsAll= i+1 + ". Номер контакта: "+ ContactNumber.get(i) +"\n   Имя контакта: " + nameContacts.get(i) +"\n   Nickname: "+idContact.get(i)+"\n"+wordsAll;
         }
+        return wordsAll;
     }
     //Переопределение метода equals()
+    @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Viber other = (Viber) obj;
-        if (idContacts != other.idContacts)
-            return false;
-        if (nameUser == null) {
-            if (other.nameUser != null)
-                return false;
-        } else if (!nameUser.equals(other.nameUser))
-            return false;
-        return true;
-    }
+    return true;}
     //Переопределение метода hashcode()
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idContacts[1];
-        result = prime * result + ((nameUser == null) ? 0 : nameUser.hashCode());
-        return result;
-    }
-    //Получение имени пользователя.
-    @Override
-    public String getNameUser() {
-        return nameUser;
+        return super.hashCode();
     }
 }

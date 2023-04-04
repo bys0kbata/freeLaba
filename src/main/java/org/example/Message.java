@@ -1,7 +1,5 @@
 package org.example;
 
-import java.io.OutputStream;
-import java.io.Writer;
 import java.util.Objects;
 
 
@@ -16,10 +14,10 @@ public interface Message {
         return Objects.equals(O,a);
     }
 
-    void addContacts(int idCont, String nameContact);
+    void addContacts(String idCont, String nameContact,String NumberCon);
 
     int getSizeContacts();
     default void sendMessageUser(int idCont, String message)
     {        System.out.println("Пользователю " + idCont+ " отправилось сообщение.");}
-    String getNameUser();
+    String getUserInfo();
 }
