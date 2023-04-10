@@ -1,14 +1,19 @@
 package org.example;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class Viber implements Message{
-    String nameUserViber = "DefaultNickName"; //Nickname пользователя
-    String nameViber = "DefaultName"; //Имя пользователя
-    String NumberViber = "000000"; //Номер пользователя
-    ArrayList<String> idContact= new ArrayList<>(100000); //Id Контактов у пользователя
-    ArrayList<String> ContactNumber = new ArrayList<>(100000);//Номера контактов у пользователя
+    private String nameUserViber = "DefaultNickName"; //Nickname пользователя
+    private String nameViber = "DefaultName"; //Имя пользователя
+    private String NumberViber = "000000"; //Номер пользователя
+    private ArrayList<String> idContact= new ArrayList<>(100000); //Id Контактов у пользователя
+    private ArrayList<String> ContactNumber = new ArrayList<>(100000);//Номера контактов у пользователя
     private ArrayList<String> nameContacts = new ArrayList<>(100000);//Имя контактов у пользователя
+    private ArrayList<String> historyMessage = new ArrayList<>(1000000);
+    private ArrayList<String> historyLastUserMessage = new ArrayList<>(100000);
+    private ArrayList<String> historyLastMessage = new ArrayList<>(100000);
+
     /*
     Конструкторы все
      */
@@ -47,12 +52,13 @@ public class Viber implements Message{
     /*
     Изменение данных контакта
     */
+    @Override
     public void editContacts(String idCont, String nameContact,String NumberCon)
     {
         for (int i = 0; i < idContact.size(); i++) {
 
-            if (idContact.get(i) == NumberCon) {
-                ContactNumber.set(i,idCont);
+            if (idContact.get(i) == idCont) {
+                ContactNumber.set(i,NumberCon);
                 nameContacts.set(i,nameContact);
             }
         }
@@ -60,6 +66,7 @@ public class Viber implements Message{
     /*
     Получение количество записанных контактов у пользователя
      */
+    @Override
     public int getSizeContacts()
     {
         return ContactNumber.size();
@@ -72,7 +79,17 @@ public class Viber implements Message{
         String UserInfo = "Ваше NickName: "+ nameUserViber+"\n Ваше Имя: "+ nameViber +"\n Ваш номер: "+NumberViber;
         return UserInfo;
     }
-
+    @Override
+    public void sendMessage(String idContact, String Message) {
+                historyMessage.add(idContact);
+                historyMessage.add(Message);
+                System.out.println("Cообщение отправилось");
+    }
+    @Override
+    public ArrayList<String> getHistoryMessage()
+    {
+        return historyMessage;
+    }
     //Переопределение метода toString()
     @Override
     public String toString() {
@@ -84,11 +101,47 @@ public class Viber implements Message{
     }
     //Переопределение метода equals()
     @Override
-    public boolean equals(Object obj) {
-    return true;}
+    public void equals() {
+        for (int i = 0; i < historyMessage.size(); i++) {
+            if( i%2 == 0 )
+            {
+                historyLastUserMessage.add(historyMessage.get(i));
+            }
+            else
+            {
+                historyLastMessage.add(historyMessage.get(i));
+            }
+
+        }
+    }
     //Переопределение метода hashcode()
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+    @Override
+    public ArrayList<String> gethistoryLastUserMessage()
+    {
+        return historyLastUserMessage;
+    }
+    @Override
+    public ArrayList<String> gethistoryLastMessage()
+    {
+        return historyLastMessage;
+    }
+    @Override
+    public void output(OutputStream out) throws IOException {
+        DataOutputStream outputStream = new DataOutputStream(out);
+        outputStream.writeUTF(getClass().getName());
+        outputStream.write(nameViber.getBytes());
+        outputStream.flush();
+    }
+    @Override
+    public void write(Writer out) {
+        PrintWriter printWriter = new PrintWriter(out);
+        printWriter.println(getClass().getName());
+        printWriter.println(nameViber);
+        printWriter.println();
+        printWriter.flush();
     }
 }

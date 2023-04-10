@@ -1,23 +1,21 @@
 package org.example;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Writer;
+import java.util.ArrayList;
 
 
 public interface Message {
-    default int HashCode(Object O) {
-        return Objects.hash(O);
-    }
-    default String tostring(Object O) {
-        return Objects.toString(O);
-    }
-    default boolean equal(Object O, Object a) {
-        return Objects.equals(O,a);
-    }
-
     void addContacts(String idCont, String nameContact,String NumberCon);
-
+    void editContacts(String idCont, String nameContact, String NumberCon);
     int getSizeContacts();
-    default void sendMessageUser(int idCont, String message)
-    {        System.out.println("Пользователю " + idCont+ " отправилось сообщение.");}
     String getUserInfo();
+    void equals();
+    void sendMessage(String idContact, String Message);
+    ArrayList<String> getHistoryMessage();
+    void output(OutputStream out) throws IOException;
+    void write(Writer out);
+    ArrayList<String> gethistoryLastUserMessage();
+    ArrayList<String> gethistoryLastMessage();
 }
