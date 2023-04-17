@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public interface Message {
     void addContacts(String idCont, String nameContact,String NumberCon);
+
+    void editIdContacts(int idCont, String nameContact);
+
     void editContacts(String idCont, String nameContact, String NumberCon);
     int getSizeContacts();
     String getUserInfo();
@@ -17,5 +20,10 @@ public interface Message {
     void output(OutputStream out) throws IOException;
     void write(Writer out);
     ArrayList<String> gethistoryLastUserMessage();
+
+    ArrayList<String> getIDName();
+
     ArrayList<String> gethistoryLastMessage();
+
+    void editContacts(int idCont, String nameContact);
 }

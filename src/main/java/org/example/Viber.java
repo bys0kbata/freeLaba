@@ -49,6 +49,11 @@ public class Viber implements Message{
             ContactNumber.add(idCont);
             nameContacts.add( nameContact);
     }
+    @Override
+    public void editIdContacts(int idCont, String nameContact)
+    {
+        idContact.set(idCont,nameContact);
+    }
     /*
     Изменение данных контакта
     */
@@ -125,10 +130,18 @@ public class Viber implements Message{
         return historyLastUserMessage;
     }
     @Override
+    public ArrayList<String> getIDName(){return idContact;}
+    @Override
     public ArrayList<String> gethistoryLastMessage()
     {
         return historyLastMessage;
     }
+
+    @Override
+    public void editContacts(int idCont, String nameContact) {
+        idContact.set(idCont,nameContact);
+    }
+
     @Override
     public void output(OutputStream out) throws IOException {
         DataOutputStream outputStream = new DataOutputStream(out);

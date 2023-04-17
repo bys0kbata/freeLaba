@@ -49,6 +49,12 @@ public class Telegram implements Message{
         ContactNumber.add(idCont);
         nameContacts.add( nameContact);
     }
+
+    @Override
+    public void editIdContacts(int idCont, String nameContact) {
+        idContact.set(idCont,nameContact);
+    }
+
     /*
     Изменение данных контакта
     */
@@ -143,9 +149,20 @@ public class Telegram implements Message{
     {
         return historyLastUserMessage;
     }
+
+    @Override
+    public ArrayList<String> getIDName() {
+        return idContact;
+    }
+
     @Override
     public ArrayList<String> gethistoryLastMessage()
     {
         return historyLastMessage;
+    }
+
+    @Override
+    public void editContacts(int idCont, String nameContact) {
+
     }
 }

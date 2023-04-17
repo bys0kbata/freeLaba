@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Laba5.WriterThread;
+
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.OutputStream;
@@ -13,6 +15,7 @@ public class ControlClass {
     public String serializableFile = "serializableMessag.bin";
     Scanner in = new Scanner(System.in);
     public Viber viberMessage = new Viber();
+    public WriterThread writerViber = new WriterThread(viberMessage);
     public void ControlMessage(){
         try {
             System.out.println("Выберите Мессенджер (Viber/Telegram):");
@@ -42,7 +45,7 @@ public class ControlClass {
     public void ControlViber(){
        int ChoiceViber;
        try {
-           System.out.println("Выберите номер действие: \n 1) Добавить контакт; \n 2) Вывод всех контактов;  \n 3) Отправить сообщение контакта; \n 4) Изменить контакт; \n 5) Количество всего контактов; \n 6) Получение историй контактов; \n 7) Удаление контактов; \n 8) Полная информация о себе; \n 9) Выйти;");
+           System.out.println("Выберите номер действие: \n 1) Добавить контакт; \n 2) Вывод всех контактов;  \n 3) Отправить сообщение контакта; \n 4) Изменить контакт; \n 5) Количество всего контактов; \n 6) Получение историй контактов; \n 7) Выгрузка данных в файлы; \n 8) Полная информация о себе;\n 9) Лаба5; \n 10) Выйти;");
            ChoiceViber = in.nextInt();
            switch (ChoiceViber) {
                case 1://Добавление контакта
@@ -105,7 +108,7 @@ public class ControlClass {
                    break;
 
                }
-               case 7://Удаление контактов
+               case 7://Выгрузка данных в файлы
                {
                    FileWriter fileOutputStream = new FileWriter(textFile);
                    viberMessage.write(fileOutputStream);
@@ -118,7 +121,13 @@ public class ControlClass {
                    ControlViber();
                    break;
                }
-               case 9://Выход из Мессенджера
+               case 9: //Лаба5
+               {
+                   writerViber.run();
+                   ControlViber();
+                   break;
+               }
+               case 10://Выход из Мессенджера
                {
                    System.out.println("Выходим из Viber");
                    ChoiceMessge = " ";
@@ -136,7 +145,7 @@ public class ControlClass {
         int ChoiceTelegram;
         Telegram telegramMessage = new Telegram();
         try {
-            System.out.println("Выберите номер действие: \n 1) Добавить контакт; \n 2) Вывод всех контактов;  \n 3) Отправить сообщение контакта; \n 4) Изменить контакт; \n 5) Количество всего контактов; \n 6) Получение историй контактов; \n 7) Удаление контактов; \n 8) Полная информация о себе; \n 9) Выйти;");
+            System.out.println("Выберите номер действие: \n 1) Добавить контакт; \n 2) Вывод всех контактов;  \n 3) Отправить сообщение контакта; \n 4) Изменить контакт; \n 5) Количество всего контактов; \n 6) Получение историй контактов; \n 7) Выгрузка данных в файлы; \n 8) Полная информация о себе; \n 9) Лаба5; \n 10) Выйти;");
             ChoiceTelegram = in.nextInt();
             switch (ChoiceTelegram) {
                 case 1://Добавление контакта
@@ -200,9 +209,12 @@ public class ControlClass {
                     break;
 
                 }
-                case 7://Удаление контактов
+                case 7://Выгрузка данных в файлы
                 {
-
+                    FileWriter fileOutputStream = new FileWriter(textFile);
+                    viberMessage.write(fileOutputStream);
+                    OutputStream file = new FileOutputStream(byteFile);
+                    viberMessage.output(file);
                 }
                 case 8://Полная информация о себе
                 {
@@ -210,7 +222,12 @@ public class ControlClass {
                     ControlTelegram();
                     break;
                 }
-                case 9://Выход из Мессенджера
+                case 9://Лаба5
+                {
+                    ControlTelegram();
+                    break;
+                }
+                case 10://Выход из Мессенджера
                 {
                     System.out.println("Выходим из Viber");
                     ChoiceMessge = " ";
