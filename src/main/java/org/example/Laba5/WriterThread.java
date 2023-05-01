@@ -1,8 +1,6 @@
 package org.example.Laba5;
 
-import org.example.Main;
 import org.example.Message;
-import org.example.Viber;
 
 public class WriterThread extends Thread{
     Message obj;

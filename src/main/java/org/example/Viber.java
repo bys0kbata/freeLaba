@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Viber implements Message{
     private String nameUserViber = "DefaultNickName"; //Nickname пользователя
@@ -27,6 +28,7 @@ public class Viber implements Message{
             this.idContact.add(1, "DefaultConTwo");
             this.ContactNumber.add(1, "112");
             this.nameContacts.add(1, "Cлужба помощи.");
+
         }
         //конструктор с параметрами
     public Viber(String nameUser)
@@ -38,7 +40,13 @@ public class Viber implements Message{
             this.idContact.add(1, "DefaultConTwo");
             this.ContactNumber.add(1, "112");
             this.nameContacts.add(1, "Cлужба помощи.");
+
         }
+        @Override
+        public String getNameUser(){
+        return nameUserViber;
+        }
+
     /*
     Добавление контактов.
      */
@@ -74,7 +82,7 @@ public class Viber implements Message{
     @Override
     public int getSizeContacts()
     {
-        return ContactNumber.size();
+        return idContact.size();
     }
     /*
     Получение полной информаций о пользователе.
@@ -156,5 +164,18 @@ public class Viber implements Message{
         printWriter.println(nameViber);
         printWriter.println();
         printWriter.flush();
+    }
+    @Override
+    public void setIdContact(int amountOfItems) {
+        Scanner scan = new Scanner(System.in);
+        for (int i = 0; i < amountOfItems; i++) {
+            String cont = scan.nextLine();
+            if (i < idContact.size()) {
+                this.idContact.set(i, cont);
+            }
+            else {
+                this.idContact.add(i,cont);
+            }
+        }
     }
 }

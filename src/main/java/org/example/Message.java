@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 
 public interface Message {
-    void addContacts(String idCont, String nameContact,String NumberCon);
+    String getNameUser();
+
+    void addContacts(String idCont, String nameContact, String NumberCon);
 
     void editIdContacts(int idCont, String nameContact);
 
@@ -26,4 +28,6 @@ public interface Message {
     ArrayList<String> gethistoryLastMessage();
 
     void editContacts(int idCont, String nameContact);
+
+    void setIdContact(int amountOfItems);
 }

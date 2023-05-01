@@ -39,9 +39,15 @@ public class Telegram implements Message{
         this.ContactNumber.add(1, "112");
         this.nameContacts.add(1, "Cлужба помощи.");
     }
+
+    @Override
+    public String getNameUser() {
+        return  nameUserTelegram;
+    }
+
     /*
-    Добавление контактов.
-     */
+        Добавление контактов.
+         */
     @Override
     public void addContacts(String idCont, String nameContact,String NumberCon)
     {
@@ -163,6 +169,11 @@ public class Telegram implements Message{
 
     @Override
     public void editContacts(int idCont, String nameContact) {
+
+    }
+
+    @Override
+    public void setIdContact(int amountOfItems) {
 
     }
 }
